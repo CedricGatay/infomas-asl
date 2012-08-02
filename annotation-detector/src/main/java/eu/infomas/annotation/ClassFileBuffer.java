@@ -28,6 +28,7 @@ import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.zip.ZipInputStream;
 
 /**
  * {@code ClassFileBuffer} is used by {@link AnnotationDetector} to efficiently 
@@ -83,6 +84,9 @@ final class ClassFileBuffer implements DataInput {
             }
             resizeIfNeeded();
         } while (n >= 0);
+        if (!(in instanceof ZipInputStream)){
+            in.close();
+        }
     }
 
     /**
